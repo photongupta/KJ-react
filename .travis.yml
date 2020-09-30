@@ -1,0 +1,12 @@
+language: node_js
+node_js: lts/*
+jobs:
+  include:
+    - stage: DEPLOY
+      script: './deploy.sh'
+      deploy:
+        app: photon-knowledge-junction
+        api_key: 07ba79d5-40c1-41f9-be33-28058b3a6d03
+        provider: heroku
+        run: restart
+        skip_cleanup: true

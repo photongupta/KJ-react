@@ -14,9 +14,9 @@ app.locals = {
   CLIENT_ID: process.env.CLIENT_ID,
   CLIENT_SECRET: process.env.CLIENT_SECRET,
   REDIRECT_URI: process.env.REDIRECT_URI,
-  db,
   SCOPE: process.env.SCOPE,
   HOME_PAGE_URL: process.env.HOME_PAGE_URL,
+  db,
 };
 
 app.use(handlers.attachDetails);
