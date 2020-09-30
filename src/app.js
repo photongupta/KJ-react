@@ -16,6 +16,7 @@ app.locals = {
   REDIRECT_URI: process.env.REDIRECT_URI,
   db,
   SCOPE: process.env.SCOPE,
+  HOME_PAGE_URL: process.env.HOME_PAGE_URL,
 };
 
 app.use(handlers.attachDetails);

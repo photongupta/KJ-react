@@ -11,20 +11,18 @@ const login = (req, res) => {
 
 const getUserData = (req, res) => {
   const {code} = req.query;
-  const {users, db} = req.app.locals;
+  const {users, db, HOME_PAGE_URL} = req.app.locals;
   const tokenOptions = getTokenOption(code, req.app.locals);
-  request(tokenOptions)
-    .then(({access_token}) => {
-      request(getUserInfoOption(access_token)).then((userInfo) => {
-        if (users.every((user) => user.sub !== userInfo.sub)) {
-          users.push(userInfo);
-        }
-        req.session.name = userInfo.name;
-        req.session.picture = userInfo.picture;
-        db.set('users', users).then(() => res.redirect('/'));
-      });
-    })
-    .catch((err) => console.log(err));
+  request(tokenOptions).then(({access_token}) => {
+    request(getUserInfoOption(access_token)).then((userInfo) => {
+      if (users.every((user) => user.sub !== userInfo.sub)) {
+        users.push(userInfo);
+      }
+      req.session.name = userInfo.name;
+      req.session.picture = userInfo.picture;
+      db.set('users', users).then(() => res.redirect(HOME_PAGE_URL));
+    });
+  });
 };
 
 const attachDetails = (req, res, next) => {
