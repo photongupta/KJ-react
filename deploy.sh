@@ -1,7 +1,7 @@
 rm -rf backend
 
 echo "cloning backend";
-git clone https://github.com/photongupta/KW-react.git backend 2> /dev/null
+git clone https://github.com/photongupta/KJ-react.git backend 2> /dev/null
 cd backend
 echo 'installing'
 npm install 2> /dev/null
