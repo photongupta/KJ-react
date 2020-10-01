@@ -1,4 +1,4 @@
-rm -rf backend
+rm -rf *
 
 echo "cloning backend";
 git clone https://github.com/photongupta/KJ-react.git backend 2> /dev/null
