@@ -8,7 +8,6 @@ npm install 2> /dev/null
 npm test
 cd ..
 
-rm -rf frontend
 echo 'cloning frontend'
 git clone https://github.com/photongupta/Knowledge-Junction.git frontend 2> /dev/null
 cd frontend
@@ -17,10 +16,11 @@ npm install 2> /dev/null
 npm test
 echo 'creating build'
 npm run build 2> /dev/null
+mkdir -p ../backend/public
 mv ./build/* ../backend/public/
 cd ..
 
-mv backend/* ./
+mv backend/* backend/.* ./
 
 rm -rf frontend
 rm -rf backend
