@@ -1,0 +1,37 @@
+name: Deploy to heroku
+on: push
+
+jobs:
+  build:
+    runs-on: macos-latest
+
+    steps:
+      - name: checkout backend
+        run: |
+          git clone https://github.com/${{secrets.USERNAME}}/KJ-react.git backend
+          cd backend
+          mkdir -p ./public
+          npm install
+          npm test
+          cd ..
+
+      - name: Create build
+        run: |
+          git clone https://github.com/${{secrets.USERNAME}}/Knowledge-Junction.git frontend
+          cd frontend
+          npm install
+          npm test
+          npm run build
+          mv build/* ../backend/public/.
+          cd ..
+          ls backend
+          ls backend/public
+          rm -rf frontend
+
+      - name: deploy to heroku
+        run: |
+          cd backend
+          git remote add heroku https://heroku:${{secrets.HEROKU_API_KEY}}@git.heroku.com/${{secrets.HEROKU_APP_NAME}}.git
+          git add .
+          git commit -m "Backend: $(git log -n 1 --format=%B)"
+          git push heroku master --set-upstream -f;
